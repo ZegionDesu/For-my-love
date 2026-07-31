@@ -44,7 +44,7 @@
         #step2, #step3, #step4 { display: none; }
 
         img.gif {
-            width: 140px;
+            width: 150px;
             margin-bottom: 20px; 
             border-radius: 10px;
         }
@@ -103,7 +103,6 @@
             text-align: center;
         }
 
-        /* --- STYLING UNTUK VIDEO FULLSCREEN --- */
         .fullscreen-video {
             position: fixed;
             top: 0;
@@ -120,7 +119,6 @@
         .fullscreen-video video {
             width: 100%;
             height: 100%;
-            /* DIUBAH: contain akan membuat video tidak terpotong sama sekali */
             object-fit: contain; 
         }
 
@@ -142,8 +140,8 @@
 
     <!-- TAHAP 1 -->
     <div class="container" id="step1">
-        <!-- LINK GIF DIGANTI -->
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2FwaGhqMGJwaDhtNDhlZThzbWJ2MWhzb2ZmbjVsbTBtbDFsbDF3aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kEKcOWl8RMLde/giphy.gif" alt="Kucing Lucu" class="gif">
+        <!-- Kucing putih ngintip lucu -->
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnhhMGN1aHc3ajl4aXFpM3h3bnc1NXRlMnA0amMzMnZ4YmcwdXRzNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="Kucing Ngintip" class="gif">
         <h2>haiiiii cantiqqqqq, mawuuu tanyaa dunggg sayaangg 👀</h2>
         <div class="btn-group">
             <button onclick="nextStep('step1', 'step2')">Lanjut 👉</button>
@@ -152,8 +150,8 @@
 
     <!-- TAHAP 2 -->
     <div class="container" id="step2">
-        <!-- LINK GIF DIGANTI -->
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExajlzZm0yeDFoNWZubnVweDdtbWZtZzFqMnRzNjJ6NDhpeHl0ZmQ3NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Lq0h93752f6J9tijrh/giphy.gif" alt="Kucing Tanya" class="gif">
+        <!-- Kucing gemes mata besar memelas -->
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzJ3aWhrNmVqOGE5dDRiNWcyOWs4ZmcyZmVpaDJncXVsdThjdDRwMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oriO0OEd9QIDdllqo/giphy.gif" alt="Kucing Memelas" class="gif">
         <h2>kamuuuu sayanggg ndaaa samaaa akuuuu 👉👈🥺</h2>
         <div class="btn-group" id="run-btn-container">
             <button onclick="nextStep('step2', 'step3'); startSurprise();">siying bingit dungg</button>
@@ -163,14 +161,14 @@
 
     <!-- TAHAP 3 -->
     <div class="container" id="step3">
-        <!-- LINK GIF DIGANTI -->
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnNnMWsxdmV6ZmdsbXJjYmVtcDR0bWdpeHB3YnQybWgzZHJpeTVieiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Vz58J8shFW6BvqnYTm/giphy.gif" alt="Kucing Love" class="gif" style="width: 150px;">
+        <!-- Dua kucing gemes pelukan / elus-elus -->
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGJxbzE4ZnIyOGp5ejRwcXZxaDV6Y2w3MnZ5ejhyZHh0YmZ0cXhhNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Vz58J8shFW6BvqnYTm/giphy.gif" alt="Kucing Pelukan" class="gif" style="width: 180px;">
         <h2 style="margin-bottom: 5px;">Happy National Girlfriend Day,<br>Erlynn sayangggg! 🎉</h2>
         <p style="font-size: 0.9rem; color: #a4b0be; margin-bottom: 10px;">1 Agustus 2026</p>
         <div class="typewriter-text" id="typewriter"></div>
     </div>
 
-    <!-- TAHAP 4: FULL VIDEO VERTICAL FULLSCREEN -->
+    <!-- TAHAP 4: FULL VIDEO -->
     <div class="fullscreen-video" id="step4">
         <video id="myVideo" controls playsinline>
             <source src="media/video.mp4" type="video/mp4">
@@ -208,7 +206,6 @@
                 index++;
                 setTimeout(typeWriter, speed);
             } else {
-                // JEDA TEPAT 3 DETIK (3000 ms) sebelum pindah ke video
                 setTimeout(() => {
                     nextStep('step3', 'step4');
                     
