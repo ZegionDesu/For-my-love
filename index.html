@@ -19,15 +19,15 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
             text-align: center;
             color: #d63031;
+            padding: 20px 0;
         }
 
         .container {
             width: 90%;
             max-width: 500px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             padding: 40px 20px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(255, 117, 140, 0.3);
@@ -36,7 +36,8 @@
             z-index: 10;
         }
 
-        #step2, #step3 { display: none; }
+        /* Sembunyikan tahap 2, 3, dan 4 di awal */
+        #step2, #step3, #step4 { display: none; }
 
         img.gif {
             width: 150px;
@@ -84,11 +85,48 @@
         }
 
         .typewriter-text {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            min-height: 120px;
+            min-height: 100px;
             margin-top: 15px;
             color: #d63031;
+        }
+
+        /* Tombol menuju galeri (Sembunyi di awal) */
+        #btn-gallery {
+            display: none;
+            margin-top: 20px;
+            animation: popIn 0.5s ease-out;
+        }
+
+        /* --- STYLING UNTUK GALERI (STEP 4) --- */
+        .video-container video {
+            width: 100%;
+            border-radius: 15px;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            background: #000;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .photo-grid img:hover {
+            transform: scale(1.05);
         }
 
         .heart-fall {
@@ -97,18 +135,21 @@
             font-size: 24px;
             animation: fall linear infinite;
             z-index: 1;
+            pointer-events: none;
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(105vh) rotate(360deg);
-            }
+            to { transform: translateY(105vh) rotate(360deg); }
+        }
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- TAHAP 1: Pembukaan -->
+    <!-- TAHAP 1 -->
     <div class="container" id="step1">
         <img src="https://media.tenor.com/FwF_nO7LBAwAAAAj/peach-goma.gif" alt="Cute Cat" class="gif">
         <h2>Hai Erlyn sayang! Aku ada pertanyaan nih buat kamu... 👀</h2>
@@ -117,7 +158,7 @@
         </div>
     </div>
 
-    <!-- TAHAP 2: Prank Tombol Lari -->
+    <!-- TAHAP 2 -->
     <div class="container" id="step2">
         <img src="https://media.tenor.com/ZJ4wU5Q7V8gAAAAj/peach-and-goma-peach-goma.gif" alt="Cat Question" class="gif">
         <h2>Erlyn sayang sama aku gak? 🥺</h2>
@@ -127,12 +168,36 @@
         </div>
     </div>
 
-    <!-- TAHAP 3: Kejutan Girlfriend Day -->
+    <!-- TAHAP 3 -->
     <div class="container" id="step3">
         <img src="https://media.tenor.com/ef305M093kMAAAAj/peach-goma.gif" alt="Cat Love" class="gif" style="width: 180px;">
         <h2 style="margin-bottom: 10px;">Happy National Girlfriend Day,<br>Erlyn Fitriani! 🎉</h2>
         <p style="font-size: 0.9rem; color: #a4b0be;">1 Agustus 2026</p>
         <div class="typewriter-text" id="typewriter"></div>
+        
+        <!-- Tombol ini akan muncul otomatis setelah teks selesai mengetik -->
+        <button id="btn-gallery" onclick="nextStep('step3', 'step4')">Lihat Kenangan Kita 📸</button>
+    </div>
+
+    <!-- TAHAP 4: GALERI VIDEO & FOTO -->
+    <div class="container" id="step4">
+        <h2>Our Memories ❤️</h2>
+        
+        <div class="video-container">
+            <!-- File video harus bernama video.mp4 -->
+            <video controls>
+                <source src="media/video.mp4" type="video/mp4">
+                Browser kamu tidak mendukung pemutaran video.
+            </video>
+        </div>
+
+        <div class="photo-grid">
+            <!-- File foto harus bernama foto1.jpg, foto2.jpg, dll -->
+            <img src="media/foto1.jpg" alt="Memori 1">
+            <img src="media/foto2.jpg" alt="Memori 2">
+            <img src="media/foto3.jpg" alt="Memori 3">
+            <img src="media/foto4.jpg" alt="Memori 4">
+        </div>
     </div>
 
     <script>
@@ -142,19 +207,11 @@
         }
 
         function lari(btn) {
-            const container = document.getElementById('run-btn-container');
-            const containerRect = container.getBoundingClientRect();
-            
             btn.style.position = 'fixed';
-            
             const maxX = window.innerWidth - btn.clientWidth - 20;
             const maxY = window.innerHeight - btn.clientHeight - 20;
-            
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
-            
-            btn.style.left = randomX + 'px';
-            btn.style.top = randomY + 'px';
+            btn.style.left = Math.floor(Math.random() * maxX) + 'px';
+            btn.style.top = Math.floor(Math.random() * maxY) + 'px';
         }
 
         function startSurprise() {
@@ -162,7 +219,6 @@
             typeWriter();
         }
 
-        // Teks yang akan diketik otomatis
         const text = "Hehe aku juga sayang banget sama kamu, Erlyn! 🥰 Makasih ya udah selalu sabar dan jadi pacar paling hebat buat aku. I love you more than words can say! 💖";
         let index = 0;
         const speed = 70; 
@@ -172,6 +228,9 @@
                 document.getElementById("typewriter").innerHTML += text.charAt(index);
                 index++;
                 setTimeout(typeWriter, speed);
+            } else {
+                // Munculkan tombol galeri setelah ngetik beres
+                document.getElementById("btn-gallery").style.display = "inline-block";
             }
         }
 
@@ -180,16 +239,11 @@
                 const heart = document.createElement("div");
                 heart.classList.add("heart-fall");
                 heart.innerHTML = "💖";
-                
                 heart.style.left = Math.random() * 100 + "vw";
                 heart.style.animationDuration = Math.random() * 3 + 2 + "s"; 
                 heart.style.fontSize = Math.random() * 20 + 15 + "px";
-                
                 document.body.appendChild(heart);
-                
-                setTimeout(() => {
-                    heart.remove();
-                }, 5000);
+                setTimeout(() => { heart.remove(); }, 5000);
             }, 300); 
         }
     </script>
